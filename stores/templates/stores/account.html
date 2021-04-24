@@ -1,0 +1,79 @@
+{% extends 'customers/base.html' %}
+
+{% block body %}
+	<div class="container my-4">
+		<div class="media">
+		  {% if details %}
+		  <!--<img src="{{userImg.url}}" class="align-self-start mr-3 userImage" alt="...">-->
+		  <div class="media-body info">
+		    <h4 class="mt-0">{{details.store_name}}</h4><br>
+			    <div class="container my-4">
+					<table class="table">
+						<tbody>
+							<tr>
+								<th scope="row">Category</th>
+								<td>{{ details.category }}</td>
+								</div>
+							</tr>
+							{% if details.description %}
+								<tr>
+									<th scope="row">Description</th>
+									<td>{{ details.description }}</td>
+									</div>
+								</tr>
+							{% endif %}
+								<tr>
+									<th scope="row">Email ID</th>
+									<td>{{ details.store_email }}</td>
+									</div>
+								</tr>
+							{% if details.contact %}
+								<tr>
+									<th scope="row">Contact Number</th>
+									<td>{{ details.contact }}</td>
+									</div>
+								</tr>
+							{% endif %}
+							<tr>
+								<th scope="row">Address</th>
+								<td>{{ details.address1 }} {{ details.locality }} {{ details.city }} {{ details.pincode }}</td>
+								</div>
+							</tr>
+						</tbody>
+					</table>
+					{% if request.user.is_authenticated %}
+						<a class="btn btn-primary" href="{% url 'editdetails' %}">Edit</a>
+					{% else %}
+						<a class="btn btn-primary" href="{% url 'bookappointment' details.id %}">Book an Appointment</a>
+					{% endif %}
+				</div>
+				{% if request.user.is_authenticated %}
+					<h6>Slot availability is as follows</h6>
+					{% for slot in timeslots %}
+						<div class="container">
+						  <div class="row">
+						    <div class="col-sm">
+						      <a class="btn btn-outline-primary my-2" href="#">{{ slot.starttime|date:'H:i:s' }}-{{ slot.endtime|date:'H:i:s' }}</a>
+						    </div>{% if request.user.is_authenticated %}<p>{{slot.limit}}</p>{% endif %}
+						    <!--<div class="col-sm">
+						      
+						    </div>
+						    <div class="col-sm">
+						      
+						    </div>-->
+						  </div>
+						</div>
+					{% endfor %}
+				{% endif %}
+		  	</div> 
+		  	{% endif %}
+		</div>
+	</div>
+
+{% endblock%}
+
+{% block navbtn %}
+	{% if request.user.is_authenticated %}
+		<a class="btn btn-outline-primary" href="{% url 'logout' %}">Logout</a>
+	{% endif %}
+{% endblock %}

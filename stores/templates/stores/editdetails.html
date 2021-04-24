@@ -1,0 +1,75 @@
+{% extends 'customers/base.html' %}
+
+{% block body %}
+
+	<div class="container my-4">
+		<form method='POST' action='/stores/editdetails'>
+			{% csrf_token %}
+
+		  <div class="form-group my-4">
+		    <label for="mail">Store Email ID</label>
+		    <input type="text" class="form-control" id="storemail" placeholder="" name="storemail" required {% if details %} value="{{ details.store_email }}" {% endif %}>
+		  </div>
+
+		  <div class="form-group my-4">
+		    <label for="name">Store Name</label>
+		    <input type="text" class="form-control" id="name" placeholder="" name="storename" required {% if details %} value="{{ details.store_name }}" {% endif %}>
+		  </div>
+
+		  <select class="custom-select mr-sm-2" id="dropdown" name="category" required>
+	        <option disabled hidden {% if not details %} selected {% endif %}>Choose a category</option>
+	        <option value="Department Store">Department Store</option>
+	        <option value="Speciality Store">Speciality Store</option>
+	        <option value="Supermarket">Supermarket</option>
+	        <option value="Convenience Store">Convenience Store</option>
+	        <option value="Discount Store">Discount Store</option>
+	        <option value="Hypermarket">Hypermarket</option>
+	      </select>
+
+	      <div class="form-group my-4">
+		    <label for="name">Store Description</label>
+		    <input type="text" class="form-control" id="description" placeholder="" name="description" {% if details %} value="{{ details.description }}" {% endif %}>
+		  </div>
+
+		  <div class="form-group my-4">
+	    	<label for="name">Address</label>
+	    	<input type="text" class="form-control" id="address1" placeholder="Enter store number, street name etc." name="address1" required {% if details %} value="{{ details.address1 }}" {% endif %}>
+	    	<input type="text" class="form-control" id="address2" placeholder="Locality" name="locality" required {% if details %} value="{{ details.locality }}" {% endif %}>
+	    	<input type="text" class="form-control" id="city" placeholder="City" name="city" required {% if details %} value="{{ details.city }}" {% endif %}>
+	    	<input type="text" class="form-control" id="pincode" placeholder="Pin Code" name="pincode" required {% if details %} value="{{ details.pincode }}" {% endif %}>
+	  	  </div>
+
+		  <div class="form-group my-4">
+		    <label for="name">Contact Number</label>
+		    <input type="text" class="form-control" id="contactnumber" placeholder="" name="contactnumber" {% if details %} value="{{ details.contact }}" {% endif %}>
+		  </div>
+
+		  <div class="form-group my-4">
+			<label for="name">Timings</label>
+				<div class="row">
+				    <div class="col-6">
+				        <label for="input-time">Opening time</label>
+						<input id="input-time" type="time" name="openingtime" required {% if details %} value="{{ details.openingtime|date:'H:i:s' }}" {% else %} value="00:00:00" {% endif %}>
+						<span class="result"></span>
+				    </div>
+				    <div class="col-xs-6 mx-4">
+				        <label for="input-time">Closing time</label>
+						<input id="input-time" type="time"  name="closingtime" required {% if details %} value="{{ details.closingtime|date:'H:i:s' }}" {% else %} value="00:00:00" {% endif %}>
+						<span class="result"></span>
+				    </div>
+				</div>
+			</div>
+			 <div class="form-group my-4">
+			    <label for="name">Limit of people per hour (Enter a number)</label>
+			    <input type="text" class="form-control" id="limit" placeholder="" name="limit" required {% if details %} value="{{ details.limit }}" {% endif %}>
+			  </div>
+			 <div class="container">
+			 	<div class="row">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</div>
+			<!--<p style="color:Gray">Please note that changes in time and limits occur after midnight.</p>-->
+		</form>
+	</div>
+
+{% endblock %}

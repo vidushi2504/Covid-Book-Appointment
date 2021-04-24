@@ -1,0 +1,30 @@
+{% extends 'customers/base.html' %}
+
+{% block body %}
+
+<div class="container my-4">
+	<h3>Login</h3>
+	<form method='POST' action='#'>
+		{% csrf_token %}
+
+	  <div class="form-group my-4">
+	    <label for="username">Username</label>
+	    <input type="text" class="form-control" id="username" placeholder="" name="username" required>
+	  </div>
+
+	  <div class="form-group my-4">
+	    <label for="password">Password</label>
+	    <input type="password" class="form-control" id="password" placeholder="" name="password" required>
+	  </div>
+
+	  <button type="submit" class="btn btn-primary">Login</button>
+	</form>
+</div>
+
+{% endblock %}
+
+{% block nav_btn %}
+
+<a class="btn btn-outline-primary" href="{% url 'signup' %}">Sign Up</a>
+
+{% endblock %}

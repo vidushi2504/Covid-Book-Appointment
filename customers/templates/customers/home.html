@@ -1,0 +1,37 @@
+{% extends 'customers/base.html' %}
+
+{% block body %}
+
+<div class="container my-4">
+
+	<!--<div class="container my-2 d-flex justify-content-center">-->
+	  <form class="form" action="\search">
+	      <!--<input class="form-control mr-sm-2" type="search" placeholder="Search for a store" aria-label="Search" name="search" id="search">-->
+	      <div class="input-group mb-3">
+			  <input type="text" class="form-control" placeholder="Search for a store" name="search" id="search" aria-describedby="basic-addon2">
+			  <div class="input-group-append">
+			    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			  </div>
+			</div>
+	  </form>
+
+	<div class="jumbotron">
+	  <h1 class="display-4">Stay Safe</h1>
+	  <p class="lead"></p>
+	  <hr class="my-4">
+	  <p>Stay Safe allows you to book appointments before visiting stores so that you can avoid being in crowded spaces and maintain social distancing.</p>
+	  <p class="lead">
+	    <a class="btn btn-primary btn-lg" href="https://www.mohfw.gov.in/" role="button">Get latest news for COVID-19</a>
+	  </p>
+	</div>
+
+</div>
+
+{% endblock %}
+
+{% block navbtn %}
+
+	<a class="btn btn-outline-primary" href="{% url 'login' %}">Login</a>
+	<a class="btn btn-outline-primary ml-2" href="{% url 'signup' %}">Register a Store</a>
+
+{% endblock %}

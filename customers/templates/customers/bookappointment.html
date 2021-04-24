@@ -1,0 +1,31 @@
+{% extends 'customers/base.html' %}
+
+{% block body %}
+
+	<div class="container my-4">
+		<h2>Book an Appointment</h2>
+		<form method='POST' action='#'>
+		  {% csrf_token %}
+		  <div class="form-group">
+		    <label for="Email1">Email address</label>
+		    <input type="email" class="form-control" name="email" id="Email1" aria-describedby="emailHelp">
+		  </div>
+		  <div class="form-group">
+		    <label for="Email1">Name</label>
+		    <input type="text" class="form-control" id="name" name="name" aria-describedby="name">
+		  </div>
+		  <div class="form-group">
+		  	<label for="timeslot">Time Slot</label>
+			  <select class="custom-select mr-sm-2" id="dropdown" name="time" required>
+			  	<option selected>Choose a timeslot</option>
+			  	{% for t in timeslots %}
+			  		<option value="{{t.starttime|date:'G:i:s' }}">{{ t.starttime|date:'H:i:s' }}-{{ t.endtime|date:'H:i:s' }}</option>
+			  	{% endfor %}
+			  </select>
+		  </div>
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+
+{% endblock %}
+

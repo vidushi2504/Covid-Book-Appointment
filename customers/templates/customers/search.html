@@ -1,0 +1,39 @@
+{% extends 'customers/base.html' %}
+
+{% block body %}
+	<div class="container my-4">
+		
+		  <form class="form" action="\search">
+	      <!--<input class="form-control mr-sm-2" type="search" placeholder="Search for a store" aria-label="Search" name="search" id="search">-->
+	      <div class="input-group mb-3">
+			  <input type="text" class="form-control" placeholder="Search for a store" name="search" id="search" aria-describedby="basic-addon2">
+			  <div class="input-group-append">
+			    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			  </div>
+			</div>
+	  </form>
+		{% if not object_list %}
+			<h4>No such store</h4>
+			{% else %}
+			{% for i in object_list %}
+			<div class="card my-2">
+		  		<div class="card-body">
+		    	<h2>{{ i.store_name }}</h2>
+		    	<h4>{{ i.address1 }} {{ i.locality }} {{ i.city }} {{ i.pincode }}</h4>
+		    	<a type="button" name="button" class="btn btn-primary" role="button" href="{% url 'account' i.id %}">View</a>
+		  		</div>
+			</div>
+			{% endfor %}
+		{% endif %}
+
+		{% if is_paginated %}
+			{% if page_obj.has_prev %}
+				<a href="?page={{ page_obj.prev_page_number }}" role="button" class="btn btn-outline-primary">{{page_obj.prev_page_number}}</a>
+			{% endif %} 
+			<a href="?page={{ page_obj.number }}" class="btn btn-primary">{{page_obj.number}}</a>
+			{% if page_obj.has_next %}
+				<a href="?page={{ page_obj.next_page_number }}" role="button" class="btn btn-outline-primary">{{page_obj.next_page_number}}</a>
+			{% endif %} 
+		{% endif %}
+	</div>
+{% endblock %}
