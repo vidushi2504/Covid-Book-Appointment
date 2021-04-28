@@ -1,0 +1,1 @@
+Add an email and password in settings.py for the email service to work.
